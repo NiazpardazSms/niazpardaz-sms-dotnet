@@ -1,0 +1,21 @@
+## .NET
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+## NuGet
+*.nupkg
+*.snupkg
+
+## IDE
+.vs/
+.vscode/
+*.user
+*.suo
+.idea/
+
+## Build
+[Dd]ebug/
+[Rr]elease/
