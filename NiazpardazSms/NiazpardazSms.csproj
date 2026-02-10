@@ -4,18 +4,24 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>8.0</LangVersion>
         <PackageId>NiazpardazSms</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Authors>Niazpardaz</Authors>
         <Company>Niazpardaz</Company>
-        <Description>SDK رسمی پنل پیامکی نیازپرداز</Description>
-        <PackageTags>sms;iran;niazpardaz;پیامک</PackageTags>
+        <Description>
+            SDK رسمی پنل پیامکی نیازپرداز
+            برای خرید پنل میتوانید به وبسایت نیازپرداز مراجعه کنید: https://niazpardaz-sms.com
+        </Description>
+        <PackageTags>sms;iran;niazpardaz;پیامک;otp</PackageTags>
         <RepositoryUrl>https://github.com/HiraCompany/niazpardaz-sms-dotnet</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/HiraCompany/niazpardaz-sms-dotnet</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
+        <None Include="icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
