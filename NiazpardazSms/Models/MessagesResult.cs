@@ -108,7 +108,7 @@ namespace NiazpardazSms.Models
         /// <summary>
         /// وضعیت ارسال پیامک
         /// </summary>
-        [JsonProperty("sendStatus")]
+        [JsonProperty("sendMethod")]
         public SmsSendMethodType SendMethod { get; set; }
         
         /// <summary>

@@ -83,7 +83,7 @@ namespace NiazpardazSms
             if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentNullException(nameof(message));
 
-            var results = await SendBulkAsync(
+            var result = await SendBulkAsync(
                 fromNumber,
                 new[] { toNumber },
                 message,
@@ -91,7 +91,7 @@ namespace NiazpardazSms
                 sendDelay,
                 cancellationToken);
 
-            return results[0];
+            return result;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace NiazpardazSms
         /// <param name="sendDelay">تاخیر ارسال</param>
         /// <param name="cancellationToken">توکن لغو</param>
         /// <returns>لیست نتایج ارسال</returns>
-        public async Task<List<SendBatchSmsResult>> SendBulkAsync(
+        public async Task<SendBatchSmsResult> SendBulkAsync(
             string fromNumber,
             IEnumerable<string> toNumbers,
             string message,
@@ -128,7 +128,7 @@ namespace NiazpardazSms
                 sendDelay
             };
 
-            return await PostAsync<List<SendBatchSmsResult>>("/SendBatchSms", payload, cancellationToken);
+            return await PostAsync<SendBatchSmsResult>("/SendBatchSms", payload, cancellationToken);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace NiazpardazSms
         /// <param name="sendDelay">تاخیر ارسال</param>
         /// <param name="cancellationToken">توکن لغو</param>
         /// <returns>لیست نتایج ارسال</returns>
-        public async Task<List<SendBatchSmsResult>> SendVoiceOtpAsync(
+        public async Task<SendBatchSmsResult> SendVoiceOtpAsync(
             string fromNumber,
             string toNumber,
             string otp,
@@ -199,7 +199,7 @@ namespace NiazpardazSms
                 isFlash
             };
 
-            return await PostAsync<List<SendBatchSmsResult>>("/SendVoiceOtp", payload, cancellationToken);
+            return await PostAsync<SendBatchSmsResult>("/SendVoiceOtp", payload, cancellationToken);
         }
         
         #endregion
@@ -210,20 +210,20 @@ namespace NiazpardazSms
         /// گزارش تحویل پیامک گروهی
         /// </summary>
         /// <param name="batchSmsId">شناسه ارسال گروهی</param>
-        /// <param name="index">شروع از ایندکس</param>
-        /// <param name="count">تعداد</param>
+        /// <param name="pageIndex">شماره صفحه</param>
+        /// <param name="pageSize">تعداد رکورد در صفحه</param>
         /// <param name="cancellationToken">توکن لغو</param>
         public async Task<BatchDeliveryResult> GetBatchDeliveryAsync(
             int batchSmsId,
-            int index = 0,
-            int count = 100,
+            int pageIndex = 1,
+            int pageSize = 100,
             CancellationToken cancellationToken = default)
         {
             var payload = new
             {
                 batchSmsId,
-                index,
-                count
+                index = pageIndex,
+                count = pageSize
             };
 
             return await PostAsync<BatchDeliveryResult>("/GetBatchDelivery", payload, cancellationToken);
@@ -256,7 +256,7 @@ namespace NiazpardazSms
         /// <param name="cancellationToken">توکن لغو</param>
         public async Task<CreditResult> GetCreditAsync(CancellationToken cancellationToken = default)
         {
-            return await PostAsync<CreditResult>("/GetCredit", null, cancellationToken);
+            return await PostAsync<CreditResult>("/GetCredit", new { }, cancellationToken);
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace NiazpardazSms
         /// <param name="cancellationToken">توکن لغو</param>
         public async Task<SenderNumbersResult> GetSenderNumbersAsync(CancellationToken cancellationToken = default)
         {
-            return await PostAsync<SenderNumbersResult>("/GetSenderNumbers", null, cancellationToken);
+            return await PostAsync<SenderNumbersResult>("/GetSenderNumbers", new { }, cancellationToken);
         }
 
         #endregion
@@ -294,22 +294,22 @@ namespace NiazpardazSms
         /// </summary>
         /// <param name="messageType">نوع پیامک</param>
         /// <param name="fromNumbers">شماره‌های فرستنده (با کاما جدا شده)</param>
-        /// <param name="index">شروع از ایندکس</param>
-        /// <param name="count">تعداد</param>
+        /// <param name="pageIndex">شماره صفحه</param>
+        /// <param name="pageSize">تعداد رکورد در صفحه</param>
         /// <param name="cancellationToken">توکن لغو</param>
         public async Task<MessagesResult> GetMessagesAsync(
             int messageType,
             string fromNumbers,
-            int index = 0,
-            int count = 100,
+            int pageIndex = 1,
+            int pageSize = 100,
             CancellationToken cancellationToken = default)
         {
             var payload = new
             {
                 messageType,
                 fromNumbers,
-                Index = index,
-                Count = count
+                index = pageIndex,
+                count = pageSize
             };
 
             return await PostAsync<MessagesResult>("/GetMessages", payload, cancellationToken);
@@ -326,8 +326,8 @@ namespace NiazpardazSms
         public async Task<MessagesResult> GetMessagesByDateRangeAsync(
             int messageType,
             string fromNumbers,
-            string fromDate,
-            string toDate,
+            DateTime fromDate,
+            DateTime toDate,
             CancellationToken cancellationToken = default)
         {
             var payload = new
@@ -356,7 +356,7 @@ namespace NiazpardazSms
         {
             var payload = new
             {
-                numbers
+                numbers = string.Join(",", numbers)
             };
 
             return await PostAsync<BlacklistNumbersResult>("/ExtractTelecomBlacklistNumbers", payload, cancellationToken);

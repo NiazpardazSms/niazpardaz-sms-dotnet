@@ -64,6 +64,9 @@ var result = await client.SendBulkAsync(
     message: "پیام گروهی",
     isFlash: false
 );
+
+Console.WriteLine($"شناسه ارسال: {result.BatchSmsId}");
+Console.WriteLine($"وضعیت: {result.ResultCode}");
 ```
 
 ### ارسال LikeToLike (هر شماره پیام مخصوص خودش)
@@ -86,6 +89,9 @@ var result = await client.SendVoiceOtpAsync(
     toNumber: "09123456789",
     otp: "12345"
 );
+
+Console.WriteLine($"شناسه ارسال: {result.BatchSmsId}");
+Console.WriteLine($"وضعیت: {result.ResultCode}");
 ```
 
 ### گزارش تحویل ارسال گروهی
@@ -93,8 +99,8 @@ var result = await client.SendVoiceOtpAsync(
 ```csharp
 var delivery = await client.GetBatchDeliveryAsync(
     batchSmsId: 123456,
-    index: 0,
-    count: 100
+    pageIndex: 1,
+    pageSize: 100
 );
 
 if (delivery.ResultCode == DeliveryResultCode.Success)
@@ -153,8 +159,8 @@ Console.WriteLine($"تعداد: {inboxCount.InboxCount}");
 var messageResult = await client.GetMessagesAsync(
     messageType: 1,
     fromNumbers: "10001234",
-    index: 0,
-    count: 50
+    pageIndex: 1,
+    pageSize: 50
 );
 
 if (messageResult.ResultCode == 0)
@@ -172,8 +178,8 @@ if (messageResult.ResultCode == 0)
 var messageResult = await client.GetMessagesByDateRangeAsync(
     messageType: 1,
     fromNumbers: "10001234",
-    fromDate: DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd"),
-    toDate: DateTime.Today.ToString("yyyy-MM-dd");
+    fromDate: DateTime.Today.AddDays(-1),
+    toDate: DateTime.Today
 );
 
 if (messageResult.ResultCode == 0)
