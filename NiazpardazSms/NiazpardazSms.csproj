@@ -12,8 +12,8 @@
             برای خرید پنل میتوانید به وبسایت نیازپرداز مراجعه کنید: https://niazpardaz-sms.com
         </Description>
         <PackageTags>sms;iran;niazpardaz;پیامک;otp</PackageTags>
-        <RepositoryUrl>https://github.com/HiraCompany/niazpardaz-sms-dotnet</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/HiraCompany/niazpardaz-sms-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/NiazpardazSms/niazpardaz-sms-dotnet</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/NiazpardazSms/niazpardaz-sms-dotnet</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
