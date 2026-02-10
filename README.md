@@ -43,6 +43,8 @@ if (result.ResultCode == SendResultCode.SendWasSuccessful)
 ### ارسال پیامک تکی
 
 ```csharp
+using NiazpardazSms;
+
 var result = await client.SendAsync(
     fromNumber: "10001234",
     toNumber: "09123456789",
@@ -58,6 +60,8 @@ Console.WriteLine($"وضعیت: {result.ResultCode}");
 ### ارسال گروهی (یک متن به چند شماره)
 
 ```csharp
+using NiazpardazSms;
+
 var result = await client.SendBulkAsync(
     fromNumber: "10001234",
     toNumbers: new[] { "09123456789", "09198765432" },
@@ -69,6 +73,8 @@ var result = await client.SendBulkAsync(
 ### ارسال LikeToLike (هر شماره پیام مخصوص خودش)
 
 ```csharp
+using NiazpardazSms;
+
 var result = await client.SendSmsLikeToLikeAsync(
     fromNumber: "10001234",
     toNumbers: new[] { "09123456789", "09198765432" },
@@ -81,6 +87,8 @@ Console.WriteLine($"SmsId: {result.SmsId}");
 ### ارسال پیامک صوتی OTP
 
 ```csharp
+using NiazpardazSms;
+
 var result = await client.SendVoiceOtpAsync(
     fromNumber: "10001234",
     toNumber: "09123456789",
@@ -91,6 +99,8 @@ var result = await client.SendVoiceOtpAsync(
 ### گزارش تحویل
 
 ```csharp
+using NiazpardazSms;
+
 // گزارش تحویل ارسال گروهی
 var delivery = await client.GetBatchDeliveryAsync(
     batchSmsId: 123456,
@@ -113,6 +123,8 @@ var delivery2 = await client.GetDeliveryLikeToLikeAsync(smsId: 789);
 ### اعتبار و اطلاعات حساب
 
 ```csharp
+using NiazpardazSms;
+
 // دریافت اعتبار
 var credit = await client.GetCreditAsync();
 if (credit.ResultCode == CreditResultCode.Success)
@@ -131,6 +143,8 @@ foreach (var sender in senders.Senders)
 ### دریافت پیامک‌ها
 
 ```csharp
+using NiazpardazSms;
+
 // تعداد پیامک‌های دریافتی
 var inboxCount = await client.GetInboxCountAsync(isRead: false);
 Console.WriteLine($"تعداد: {inboxCount.InboxCount}");
@@ -155,6 +169,8 @@ var messages2 = await client.GetMessagesByDateRangeAsync(
 ### لیست سیاه مخابرات
 
 ```csharp
+using NiazpardazSms;
+
 // بررسی یک شماره
 var isBlack = await client.NumberIsInTelecomBlacklistAsync("09123456789");
 Console.WriteLine($"در لیست سیاه: {isBlack.IsBlack}");
@@ -168,6 +184,8 @@ var blacklist = await client.ExtractTelecomBlacklistNumbersAsync(
 ### بررسی محتوای پیامک
 
 ```csharp
+using NiazpardazSms;
+
 var check = await client.CheckSmsContentAsync("متن پیامک تست");
 Console.WriteLine($"متن معتبر است: {check.IsValid}");
 ```
