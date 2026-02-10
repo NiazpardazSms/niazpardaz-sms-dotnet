@@ -331,6 +331,5 @@ MIT License
 
 ## پشتیبانی
 
-- 📧 ایمیل: support@niazpardaz.ir
-- 📚 مستندات: https://docs.niazpardaz.ir
-- 🐛 گزارش باگ: [GitHub Issues](https://github.com/niazpardaz/niazpardaz-sms-dotnet/issues)
+- 📚 مستندات: https://niazpardaz-sms.com/webservice
+- 🐛 گزارش باگ: [GitHub Issues](https://github.com/NiazpardazSms/niazpardaz-sms-dotnet/issues)
