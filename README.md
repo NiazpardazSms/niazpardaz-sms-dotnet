@@ -104,9 +104,6 @@ if (delivery.ResultCode == DeliveryResultCode.Success)
         Console.WriteLine($"{delivery.Numbers[i]}: {delivery.DeliveryStatus[i]}");
     }
 }
-
-// گزارش تحویل LikeToLike
-var delivery2 = await client.GetDeliveryLikeToLikeAsync(smsId: 789);
 ```
 
 ### گزارش تحویل ارسال LikeToLike
